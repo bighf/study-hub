@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Biology Study Hub</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 700px; margin: 50px auto; padding: 20px; line-height: 1.6; }
+    .card { border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
+    #secret-games { display: none; background: #f4f4f4; padding: 20px; border-radius: 8px; margin-top: 20px; }
+    button { padding: 8px 12px; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <!-- FAKE STUDY PAGE -->
+  <h1>Cell Biology & Ecosystems</h1>
+  <p>Welcome to the student review portal. Click a topic below to read the summary notes.</p>
+  
+  <div class="card">
+    <h3>1. Photosynthesis & Energy</h3>
+    <p>Plants convert light energy into chemical energy using chlorophyll in the chloroplasts.</p>
+  </div>
+
+  <div class="card">
+    <h3>2. Cellular Respiration</h3>
+    <!-- SECRET TRIGGER: Clicking the word "mitochondria" opens the games -->
+    <p>Cells break down glucose to produce ATP inside the <span onclick="unlockGames()">mitochondria</span>.</p>
+  </div>
+
+  <!-- HIDDEN GAME MENU -->
+  <div id="secret-games">
+    <h2>Game Portal</h2>
+    <button onclick="cloakTab()">Disguise Tab as Google Drive</button>
+    <hr>
+    <p><strong>Games:</strong></p>
+    <ul>
+      <!-- You will add links to your game folders here later -->
+      <li><a href="2048/index.html">Play 2048</a></li>
+    </ul>
+  </div>
+
+  <script>
+    // Reveals the hidden game box
+    function unlockGames() {
+      document.getElementById('secret-games').style.display = 'block';
+    }
+    // Changes the tab title and icon to Google Drive
+    function cloakTab() {
+      document.title = "My Drive - Google Drive";
+      let link = document.querySelector("link[rel~='icon']") || document.createElement('link');
+      link.rel = 'icon';
+      link.href = 'https://gstatic.com';
+      document.head.appendChild(link);
+    }
+  </script>
+
+</body>
+</html>
