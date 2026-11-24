@@ -3,10 +3,11 @@
 <head>
   <title>Biology Study Hub</title>
   <style>
-    body { font-family: Arial, sans-serif; max-width: 700px; margin: 50px auto; padding: 20px; line-height: 1.6; }
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; line-height: 1.6; }
     .card { border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
     #secret-games { display: none; background: #f4f4f4; padding: 20px; border-radius: 8px; margin-top: 20px; }
-    button { padding: 8px 12px; cursor: pointer; }
+    button { padding: 8px 12px; cursor: pointer; margin-right: 5px; margin-bottom: 5px; }
+    #game-frame { width: 100%; height: 600px; border: 2px solid #ccc; border-radius: 8px; display: none; margin-top: 15px; }
   </style>
 </head>
 <body>
@@ -22,28 +23,47 @@
 
   <div class="card">
     <h3>2. Cellular Respiration</h3>
-    <!-- SECRET TRIGGER: Clicking the word "mitochondria" opens the games -->
-    <p>Cells break down glucose to produce ATP inside the <span onclick="unlockGames()">mitochondria</span>.</p>
+    <!-- SECRET TRIGGER: Clicking "mitochondria" toggles the game menu on and off -->
+    <p>Cells break down glucose to produce ATP inside the <span onclick="toggleGames()">mitochondria</span>.</p>
   </div>
 
   <!-- HIDDEN GAME MENU -->
   <div id="secret-games">
     <h2>Game Portal</h2>
     <button onclick="cloakTab()">Disguise Tab as Google Drive</button>
+    <button onclick="closeGame()">Close Game</button>
     <hr>
-    <p><strong>Games:</strong></p>
-    <ul>
-      <!-- You will add links to your game folders here later -->
-      <li><a href="2048/index.html">Play 2048</a></li>
-    </ul>
+    <p><strong>Select a Game:</strong></p>
+    
+    <!-- GAME BUTTONS: Add more buttons here as you upload more game folders -->
+    <button onclick="loadGame('2048/index.html')">Play 2048</button>
+
+    <!-- THE GAME SCREEN (Stays inside your website) -->
+    <iframe id="game-frame" src=""></iframe>
   </div>
 
   <script>
-    // Reveals the hidden game box
-    function unlockGames() {
-      document.getElementById('secret-games').style.display = 'block';
+    // Shows or hides the game portal when clicking "mitochondria"
+    function toggleGames() {
+      let menu = document.getElementById('secret-games');
+      menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
     }
-    // Changes the tab title and icon to Google Drive
+
+    // Loads the chosen game right inside the page
+    function loadGame(gameUrl) {
+      let frame = document.getElementById('game-frame');
+      frame.src = gameUrl;
+      frame.style.display = 'block';
+    }
+
+    // Hides the game screen
+    function closeGame() {
+      let frame = document.getElementById('game-frame');
+      frame.src = '';
+      frame.style.display = 'none';
+    }
+
+    // Changes tab to Google Drive
     function cloakTab() {
       document.title = "My Drive - Google Drive";
       let link = document.querySelector("link[rel~='icon']") || document.createElement('link');
